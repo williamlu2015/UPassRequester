@@ -9,5 +9,5 @@ Instructions:
 
 Program outputs:
 * If the given CWL credentials were invalid, the program raises a ValueError.
-* If there is no pending U-Pass to request, the program prints a message saying so.
-* If there is a pending U-Pass to request, the program requests it and prints a message saying so.
+* If there are no pending U-Passes to request, the program prints a message saying so.
+* If there are pending U-Pass(es) to request, the program requests them and prints a message saying so.
