@@ -71,22 +71,56 @@ def process_login(driver):
 
 def process_request(driver):
     """
-    Checks if there is a U-Pass to request, and requests it if so.
+    Checks if there is/are U-Pass(es) to request, and requests them if so.
     Precondition: driver is pointing to the "My U-Pass BC" page (with the
     "Request your U-Pass BC" table.)
     :param driver: the Selenium driver
     :return: None
     """
+    # we use any() instead of logical "or" to avoid short-circuit evaluation
+    if any([
+        check_current_month(driver),
+        check_next_month(driver)
+    ]):
+        request_button = driver.find_element_by_id("requestButton")
+        request_button.click()
+
+        print("U-Pass(es) requested.")
+    else:
+        print("No U-Passes to request.")
+
+
+def check_current_month(driver):
+    """
+    Checks if the current month's U-Pass can be requested. If so, selects its
+    checkbox and returns True. Otherwise, returns False.
+    :param driver: the Selenium driver
+    :return: whether the current month's U-Pass can be requested
+    """
+    try:
+        request_checkbox_input = driver.find_element_by_id("chk_0")
+        request_checkbox_input.click()
+
+        print("Found U-Pass pending for current month.")
+        return True
+    except NoSuchElementException:
+        print("No U-Pass pending for current month.")
+        return False
+
+
+def check_next_month(driver):
+    """
+    Checks if the next month's U-Pass can be requested. If so, selects its
+    checkbox and returns True. Otherwise, returns False.
+    :param driver: the Selenium driver
+    :return: whether the next month's U-Pass can be requested
+    """
     try:
         request_checkbox_input = driver.find_element_by_id("chk_1")
         request_checkbox_input.click()
 
-        print("Found U-Pass pending. Requesting...")
+        print("Found U-Pass pending for next month.")
+        return True
     except NoSuchElementException:
-        print("No U-Pass pending.")
-        return
-
-    request_button = driver.find_element_by_id("requestButton")
-    request_button.click()
-
-    print("U-Pass requested.")
+        print("No U-Pass pending for next month.")
+        return False
