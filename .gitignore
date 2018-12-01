@@ -1,6 +1,6 @@
-account/username.txt
-account/password.txt
-lib/chromedriver
+/account/username.txt
+/account/password.txt
+/lib/chromedriver
 
 # ================
 # Python.gitignore
