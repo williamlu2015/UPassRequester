@@ -51,7 +51,7 @@ def process_login(driver):
     :return: None
     :raises: ValueError   if the username or password is invalid
     """
-    login_name_input = driver.find_element_by_id("j_username")
+    login_name_input = driver.find_element_by_id("username")
     with open("../account/username.txt", "r") as file:
         username = file.read()
         login_name_input.send_keys(username)
@@ -61,7 +61,7 @@ def process_login(driver):
         password = file.read()
         password_input.send_keys(password)
 
-    continue_button = driver.find_element_by_name("action")
+    continue_button = driver.find_element_by_name("_eventId_proceed")
     continue_button.click()
 
     url = "https://shibboleth2.id.ubc.ca/idp/Authn/UserPassword"
