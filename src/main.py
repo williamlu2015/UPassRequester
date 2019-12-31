@@ -16,7 +16,7 @@ def main():
 
     driver = webdriver.Chrome(
         executable_path="../lib/chromedriver",
-        chrome_options=chrome_options
+        options=chrome_options
     )
     request_upass(driver)
 
