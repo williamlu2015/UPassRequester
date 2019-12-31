@@ -23,10 +23,8 @@ def request_upass(driver):
 
 def process_school(driver):
     """
-    Selects "University of British Columbia" as the school from the dropdown,
-    and continues to the CWL login page.
-    Precondition: driver is pointing to the U-Pass BC home page (with the
-    "Select your school" dropdown.)
+    Selects "University of British Columbia" as the school from the dropdown, and continues to the CWL login page.
+    Precondition: driver is pointing to the U-Pass BC home page (with the "Select your school" dropdown.)
     Postcondition: driver is pointing to the CWL login page.
     :param driver: the Selenium driver
     :return: None
@@ -42,11 +40,9 @@ def process_school(driver):
 
 def process_login(driver):
     """
-    Enters the username and password into the corresponding text input fields,
-    and logs into CWL.
+    Enters the username and password into the corresponding text input fields, and logs into CWL.
     Precondition: driver is pointing to the CWL login page.
-    Postcondition: driver is pointing to the "My U-Pass BC" page (with the
-    "Request your U-Pass BC" table.)
+    Postcondition: driver is pointing to the "My U-Pass BC" page (with the "Request your U-Pass BC" table.)
     :param driver: the Selenium driver
     :return: None
     :raises: ValueError   if the username or password is invalid
@@ -72,15 +68,13 @@ def process_login(driver):
 def process_request(driver):
     """
     Checks if there is/are U-Pass(es) to request, and requests them if so.
-    Precondition: driver is pointing to the "My U-Pass BC" page (with the
-    "Request your U-Pass BC" table.)
+    Precondition: driver is pointing to the "My U-Pass BC" page (with the "Request your U-Pass BC" table.)
     :param driver: the Selenium driver
     :return: None
     """
     # we use any() instead of logical "or" to avoid short-circuit evaluation
     if any([
-        check_current_month(driver),
-        check_next_month(driver)
+        check_current_month(driver), check_next_month(driver)
     ]):
         request_button = driver.find_element_by_id("requestButton")
         request_button.click()
@@ -92,8 +86,8 @@ def process_request(driver):
 
 def check_current_month(driver):
     """
-    Checks if the current month's U-Pass can be requested. If so, selects its
-    checkbox and returns True. Otherwise, returns False.
+    Checks if the current month's U-Pass can be requested. If so, selects its checkbox and returns True. Otherwise,
+    returns False.
     :param driver: the Selenium driver
     :return: whether the current month's U-Pass can be requested
     """
@@ -110,8 +104,8 @@ def check_current_month(driver):
 
 def check_next_month(driver):
     """
-    Checks if the next month's U-Pass can be requested. If so, selects its
-    checkbox and returns True. Otherwise, returns False.
+    Checks if the next month's U-Pass can be requested. If so, selects its checkbox and returns True. Otherwise, returns
+    False.
     :param driver: the Selenium driver
     :return: whether the next month's U-Pass can be requested
     """
